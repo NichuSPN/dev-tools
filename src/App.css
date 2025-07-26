@@ -517,6 +517,195 @@
   color: var(--accent);
 }
 
+/* JSON Viewer styles */
+.json-viewer {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1rem;
+  max-height: 500px;
+  overflow-y: auto;
+  line-height: 1.5;
+}
+
+.json-viewer-root {
+  color: var(--text-primary);
+}
+
+.json-viewer-item {
+  display: flex;
+  align-items: center;
+  padding: 2px 0;
+  min-height: 20px;
+}
+
+.json-viewer-expandable {
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.json-viewer-expandable:hover {
+  background-color: var(--bg-tertiary);
+  border-radius: 3px;
+}
+
+.json-viewer-arrow {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-right: 4px;
+  transition: transform 0.2s ease;
+  color: var(--accent);
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+.json-viewer-arrow.collapsed {
+  transform: rotate(0deg);
+}
+
+.json-viewer-arrow.expanded {
+  transform: rotate(90deg);
+}
+
+.json-viewer-key {
+  color: var(--text-primary);
+  margin-right: 8px;
+  font-weight: 500;
+}
+
+.json-viewer-value {
+  margin-left: 4px;
+}
+
+.json-viewer-string {
+  color: #10b981; /* Green for strings */
+}
+
+.json-viewer-number {
+  color: #3b82f6; /* Blue for numbers */
+}
+
+.json-viewer-boolean {
+  color: #8b5cf6; /* Purple for booleans */
+}
+
+.json-viewer-null {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.json-viewer-type {
+  color: var(--text-secondary);
+  font-style: italic;
+  margin-left: 4px;
+}
+
+.json-viewer-object-type {
+  color: var(--accent);
+}
+
+.json-viewer-array-type {
+  color: #06b6d4; /* Cyan for arrays */
+}
+
+.json-viewer-truncated {
+  color: var(--warning);
+  font-style: italic;
+}
+
+.json-viewer-empty {
+  color: var(--text-muted);
+  text-align: center;
+  padding: 2rem;
+  font-style: italic;
+}
+
+.json-viewer-children {
+  border-left: 1px solid var(--border);
+  margin-left: 6px;
+}
+
+/* JSON/YAML Formatter styles */
+.format-mode-selector {
+  display: flex;
+  gap: 0.5rem;
+  margin: 1.5rem 0;
+  padding: 0.5rem;
+  background-color: var(--bg-secondary);
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+.format-mode-selector button {
+  flex: 1;
+  padding: 0.75rem 1rem;
+}
+
+.format-mode-selector button.inactive {
+  background-color: transparent;
+  border: none;
+  color: var(--text-secondary);
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.875rem;
+}
+
+.format-mode-selector button.inactive:hover {
+  background-color: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+
+.format-options {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  background-color: var(--bg-secondary);
+  border-radius: 6px;
+  border: 1px solid var(--border);
+}
+
+.format-option-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.format-option-group label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.format-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.viewer-section {
+  margin-top: 2rem;
+}
+
+.viewer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.viewer-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
 /* UUID Generator styles */
 .uuid-controls {
   display: flex;
@@ -753,6 +942,36 @@
   
   .tools-grid {
     grid-template-columns: 1fr;
+  }
+  
+  /* JSON/YAML Formatter responsive */
+  .format-options {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+  
+  .format-option-group {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.25rem;
+  }
+  
+  .format-actions {
+    justify-content: stretch;
+  }
+  
+  .format-actions button {
+    flex: 1;
+  }
+  
+  .json-viewer {
+    max-height: 300px;
+  }
+  
+  .viewer-actions {
+    flex-direction: column;
+    width: 100%;
   }
 }
 

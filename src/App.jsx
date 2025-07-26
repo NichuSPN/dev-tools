@@ -6,6 +6,8 @@ import JsonEdnConverter from './pages/JsonEdnConverter'
 import Jwt from './pages/Jwt'
 import Base64Converter from './pages/Base64Converter'
 import UuidGenerator from './pages/UuidGenerator'
+import JsonFormatter from './pages/JsonFormatter'
+import YamlFormatter from './pages/YamlFormatter'
 import Home from './pages/Home'
 
 import Navigation from './components/navigationBar'
@@ -31,11 +33,19 @@ const toolCategories = {
       component: null,
       description: 'Convert between timestamps and readable dates'
     },
+  ],
+  'Formatters': [
     { 
-      name: 'JSON/YAML Formatter', 
-      path: '/formatter', 
-      component: null,
-      description: 'Format and validate JSON and YAML'
+      name: 'JSON Formatter', 
+      path: '/json-formatter', 
+      component: JsonFormatter,
+      description: 'Format, validate, and visualize JSON data'
+    },
+    { 
+      name: 'YAML Formatter', 
+      path: '/yaml-formatter', 
+      component: YamlFormatter,
+      description: 'Format, validate, and convert YAML data'
     },
   ],
   'Web Tools': [
@@ -44,12 +54,6 @@ const toolCategories = {
       path: '/jwt', 
       component: Jwt,
       description: 'Decode and inspect JSON Web Tokens'
-    },
-    { 
-      name: 'HTTP Converter', 
-      path: '/http-converter', 
-      component: null,
-      description: 'Convert between curl, fetch, and HTTPie formats'
     },
   ],
   'Generators & Testers': [
