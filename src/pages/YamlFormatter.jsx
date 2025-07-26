@@ -189,61 +189,44 @@ string: Hello World`
         </button>
       </div>
 
-      {/* Format Options */}
-      {mode !== 'view' && (
-        <div className="format-options">
-          <div className="format-option-group">
-            <label>Output:</label>
-            <CustomDropdown
-              options={mode === 'format' ? [
-                { value: 'yaml', label: 'Formatted YAML' }
-              ] : [
-                { value: 'json', label: 'JSON' }
-              ]}
-              value={outputType}
-              onChange={setOutputType}
-            />
-          </div>
-          
-          {outputType === 'json' && (
-            <div className="format-option-group">
-              <label>Indent:</label>
-              <CustomDropdown
-                options={[
-                  { value: 2, label: '2 spaces' },
-                  { value: 4, label: '4 spaces' },
-                  { value: 8, label: '8 spaces' }
-                ]}
-                value={indentSize}
-                onChange={setIndentSize}
-              />
-            </div>
-          )}
-          
-          <div className="format-actions">
-            <button onClick={formatInput} className="primary">
-              {mode === 'format' ? 'Format YAML' : 'Convert to JSON'}
-            </button>
-            <button onClick={validateInput}>
-              Validate Only
-            </button>
-          </div>
-        </div>
-      )}
-
       {/* Input Section */}
       <div className={mode === 'view' ? 'tool-container' : 'tool-container'} style={mode === 'view' ? { gridTemplateColumns: '1fr 1fr' } : {}}>
         <div className="tool-section">
           <div className="input-group">
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <label htmlFor="input-data">YAML Input</label>
-              <button
-                onClick={() => copyToClipboard(input, 'input')}
-                className={`copy-button ${copySuccess === 'input' ? 'copied' : ''}`}
-                disabled={!input.trim()}
-              >
-                {copySuccess === 'input' ? '✓ Copied' : 'Copy'}
-              </button>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                {mode === 'convert' && (<>
+                  <div className="format-option-group">
+                    <label>Indent:</label>
+                    <CustomDropdown
+                      options={[
+                        { value: 2, label: '2 spaces' },
+                        { value: 4, label: '4 spaces' },
+                        { value: 8, label: '8 spaces' }
+                      ]}
+                      value={indentSize}
+                      onChange={setIndentSize}
+                    />
+                  </div>
+                  <div className="format-actions">
+                    <button onClick={formatInput} className="primary">
+                      Convert to JSON
+                    </button>
+                  </div>
+                </>)}
+                {mode === 'format' && (
+                <button onClick={formatInput} className="primary">
+                  Format YAML
+                </button>)}
+                <button
+                  onClick={() => copyToClipboard(input, 'input')}
+                  className={`copy-button ${copySuccess === 'input' ? 'copied' : ''}`}
+                  disabled={!input.trim()}
+                >
+                  {copySuccess === 'input' ? '✓ Copied' : 'Copy'}
+                </button>
+              </div>
             </div>
             <textarea
               id="input-data"

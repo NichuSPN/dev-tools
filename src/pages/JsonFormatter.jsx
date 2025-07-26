@@ -184,44 +184,30 @@ function JsonFormatter() {
       </div>
 
       {/* Format Options */}
-      {mode !== 'view' && (
+      {mode === 'format' && (
         <div className="format-options">
           <div className="format-option-group">
             <label>Output:</label>
             <CustomDropdown
-              options={mode === 'format' ? [
+              options={[
                 { value: 'formatted', label: 'Formatted' },
                 { value: 'minified', label: 'Minified' }
-              ] : [
-                { value: 'yaml', label: 'YAML' }
               ]}
               value={outputType}
               onChange={setOutputType}
             />
           </div>
-          
-          {outputType === 'formatted' && (
-            <div className="format-option-group">
-              <label>Indent:</label>
-              <CustomDropdown
-                options={[
-                  { value: 2, label: '2 spaces' },
-                  { value: 4, label: '4 spaces' },
-                  { value: 8, label: '8 spaces' }
-                ]}
-                value={indentSize}
-                onChange={setIndentSize}
-              />
-            </div>
-          )}
-          
-          <div className="format-actions">
-            <button onClick={formatInput} className="primary">
-              {mode === 'format' ? 'Format JSON' : 'Convert to YAML'}
-            </button>
-            <button onClick={validateInput}>
-              Validate Only
-            </button>
+          <div className="format-option-group">
+            <label>Indent:</label>
+            <CustomDropdown
+              options={[
+                { value: 2, label: '2 spaces' },
+                { value: 4, label: '4 spaces' },
+                { value: 8, label: '8 spaces' }
+              ]}
+              value={indentSize}
+              onChange={setIndentSize}
+            />
           </div>
         </div>
       )}
@@ -232,13 +218,22 @@ function JsonFormatter() {
           <div className="input-group">
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <label htmlFor="input-data">JSON Input</label>
-              <button
-                onClick={() => copyToClipboard(input, 'input')}
-                className={`copy-button ${copySuccess === 'input' ? 'copied' : ''}`}
-                disabled={!input.trim()}
-              >
-                {copySuccess === 'input' ? '✓ Copied' : 'Copy'}
-              </button>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                {mode === 'format' && (
+                  <button onClick={formatInput} className="primary">
+                    Format JSON
+                  </button>)}
+                {mode==='convert' && (<button onClick={formatInput} className="primary">
+                  Convert to YAML
+                </button>)}
+                <button
+                  onClick={() => copyToClipboard(input, 'input')}
+                  className={`copy-button ${copySuccess === 'input' ? 'copied' : ''}`}
+                  disabled={!input.trim()}
+                >
+                  {copySuccess === 'input' ? '✓ Copied' : 'Copy'}
+                </button>
+              </div>
             </div>
             <textarea
               id="input-data"

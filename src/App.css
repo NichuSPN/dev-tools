@@ -684,6 +684,10 @@
   margin: 0;
 }
 
+.format-option-group .custom-dropdown-toggle {
+  height: 35px;
+}
+
 .format-actions {
   display: flex;
   gap: 0.5rem;
