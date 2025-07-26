@@ -1,14 +1,17 @@
 import { useState, useCallback } from 'react'
 import { 
   generateUUIDv4, 
+  generateUUIDv7,
   generateMultipleUUIDs, 
   parseUUID,
   getUUIDStats
 } from '../utils/uuidUtils'
+import CustomDropdown from '../components/CustomDropdown'
 
 function UuidGenerator() {
   const [generatedUUIDs, setGeneratedUUIDs] = useState([])
   const [count, setCount] = useState(1)
+  const [version, setVersion] = useState(4)
   const [analyzeInput, setAnalyzeInput] = useState('')
   const [analysis, setAnalysis] = useState(null)
   const [copySuccess, setCopySuccess] = useState('')
@@ -16,13 +19,13 @@ function UuidGenerator() {
 
   const generateUUIDs = useCallback(() => {
     try {
-      const uuids = generateMultipleUUIDs(count, 4) // Always generate version 4 (random) UUIDs
+      const uuids = generateMultipleUUIDs(count, version)
       setGeneratedUUIDs(uuids)
       setError('')
     } catch (error) {
       setError(error.message)
     }
-  }, [count])
+  }, [count, version])
 
 
   const analyzeUUID = useCallback(() => {
@@ -78,13 +81,25 @@ function UuidGenerator() {
       </div>
 
       <p className="muted">
-        Generate random UUIDs (Universally Unique Identifiers) version 4. 
+        Generate UUIDs (Universally Unique Identifiers) in different versions. 
         Analyze existing UUIDs to extract version and variant information.
       </p>
 
       <div className="uuid-controls">
         <div className="control-group">
-          <label htmlFor="count">Number of UUIDs to generate:</label>
+          <label htmlFor="version-select">UUID Version:</label>
+          <CustomDropdown
+            options={[
+              { value: 4, label: 'Version 4 (Random)' },
+              { value: 7, label: 'Version 7 (Time-ordered)' }
+            ]}
+            value={version}
+            onChange={setVersion}
+            placeholder="Select version"
+          />
+        </div>
+        <div className="control-group">
+          <label htmlFor="count">Number of UUIDs:</label>
           <input
             id="count"
             type="number"
@@ -192,6 +207,16 @@ function UuidGenerator() {
                 <div className="analysis-item">
                   <strong>Description:</strong> <span className="muted">{analysis.description}</span>
                 </div>
+                {analysis.generatedAt && (
+                  <div className="analysis-item">
+                    <strong>Generated At:</strong> <span className="muted">{analysis.generatedAt}</span>
+                  </div>
+                )}
+                {analysis.timestamp && (
+                  <div className="analysis-item">
+                    <strong>Timestamp:</strong> <code>{analysis.timestamp}</code>
+                  </div>
+                )}
                 {(analysis.isNil || analysis.isMax) && (
                   <div className="analysis-item">
                     <strong>Special:</strong> 
@@ -215,9 +240,11 @@ function UuidGenerator() {
         </p>
         <ul style={{ textAlign: 'left', color: 'var(--text-secondary)' }}>
           <li><strong>Version 4:</strong> Random UUIDs, most commonly used version</li>
+          <li><strong>Version 7:</strong> Time-ordered UUIDs with embedded timestamp for better performance</li>
           <li><strong>Format:</strong> 8-4-4-4-12 hexadecimal digits separated by hyphens</li>
           <li><strong>Collision probability:</strong> Practically zero (1 in 5.3 x 10³⁶)</li>
           <li><strong>Use cases:</strong> Database keys, session IDs, distributed system identifiers</li>
+          <li><strong>UUID v7 benefits:</strong> Better database performance, natural sorting, maintains temporal order</li>
         </ul>
       </div>
     </div>

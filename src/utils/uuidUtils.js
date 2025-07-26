@@ -15,6 +15,46 @@ export function generateUUIDv4() {
   })
 }
 
+// Generate UUID v7 (time-ordered)
+export function generateUUIDv7() {
+  // Get current timestamp in milliseconds
+  const timestamp = Date.now()
+  
+  // Convert timestamp to hex (48 bits)
+  const timestampHex = timestamp.toString(16).padStart(12, '0')
+  
+  // Generate random bytes for the rest
+  const randomBytes = new Uint8Array(10)
+  if (typeof crypto !== 'undefined' && crypto.getRandomValues) {
+    crypto.getRandomValues(randomBytes)
+  } else {
+    // Fallback for environments without crypto.getRandomValues
+    for (let i = 0; i < randomBytes.length; i++) {
+      randomBytes[i] = Math.floor(Math.random() * 256)
+    }
+  }
+  
+  // Set version (7) and variant bits
+  randomBytes[0] = (randomBytes[0] & 0x0f) | 0x70 // Version 7
+  randomBytes[2] = (randomBytes[2] & 0x3f) | 0x80 // Variant 10
+  
+  // Convert random bytes to hex
+  const randomHex = Array.from(randomBytes)
+    .map(b => b.toString(16).padStart(2, '0'))
+    .join('')
+  
+  // Format as UUID: xxxxxxxx-xxxx-7xxx-xxxx-xxxxxxxxxxxx
+  const uuid = [
+    timestampHex.slice(0, 8),
+    timestampHex.slice(8, 12),
+    randomHex.slice(0, 4),
+    randomHex.slice(4, 8),
+    randomHex.slice(8, 20)
+  ].join('-')
+  
+  return uuid
+}
+
 // Generate multiple UUIDs
 export function generateMultipleUUIDs(count, version = 4) {
   const uuids = []
@@ -22,6 +62,9 @@ export function generateMultipleUUIDs(count, version = 4) {
     switch (version) {
       case 4:
         uuids.push(generateUUIDv4())
+        break
+      case 7:
+        uuids.push(generateUUIDv7())
         break
       default:
         uuids.push(generateUUIDv4())
@@ -32,7 +75,7 @@ export function generateMultipleUUIDs(count, version = 4) {
 
 // Validate UUID format
 function validateUUID(uuid) {
-  const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
+  const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-7][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i
   return uuidRegex.test(uuid)
 }
 
@@ -77,6 +120,19 @@ export function parseUUID(uuid) {
   } else if (version === 4) {
     info.type = 'Random'
     info.description = 'Generated using random or pseudo-random numbers'
+  } else if (version === 7) {
+    info.type = 'Time-ordered'
+    info.description = 'Generated using Unix timestamp with random data for sorting'
+    
+    // Extract timestamp from UUID v7
+    try {
+      const timestampHex = parts[0] + parts[1]
+      const timestamp = parseInt(timestampHex, 16)
+      info.timestamp = timestamp
+      info.generatedAt = new Date(timestamp).toISOString()
+    } catch (e) {
+      // If timestamp extraction fails, continue without it
+    }
   } else {
     info.type = `Version ${version}`
     info.description = 'Less commonly used UUID version'

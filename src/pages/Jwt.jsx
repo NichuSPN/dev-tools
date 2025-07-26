@@ -9,6 +9,7 @@ import {
   getCurrentTimestamp,
   addTimeToTimestamp
 } from '../utils/general'
+import CustomDropdown from '../components/CustomDropdown'
 
 function JwtDecoder() {
   // Modes: 'decode', 'encode', 'verify'
@@ -36,7 +37,7 @@ function JwtDecoder() {
   const [copySuccess, setCopySuccess] = useState('')
 
   // Sample data
-  const sampleJWT = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJleHAiOjE3MDY3Mzk4MjIsImF1ZCI6ImV4YW1wbGUuY29tIiwiaXNzIjoiaHR0cHM6Ly9leGFtcGxlLmNvbSIsInJvbGUiOiJ1c2VyIn0.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
+  const sampleJWT = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIn0.Gfx6VO9tcxwk6xqx9yYzSfebfeakZp5JYIgP_edcw_A'
   
   const sampleHeader = {
     "alg": "HS256",
@@ -45,9 +46,7 @@ function JwtDecoder() {
   
   const samplePayload = {
     "sub": "1234567890",
-    "name": "John Doe",
-    "iat": getCurrentTimestamp(),
-    "exp": addTimeToTimestamp(24)
+    "name": "John Doe"
   }
 
   // Decode functions
@@ -204,19 +203,19 @@ function JwtDecoder() {
       {/* Mode Selection */}
       <div className="jwt-mode-selector">
         <button 
-          className={mode === 'decode' ? 'active' : ''}
+          className={mode === 'decode' ? 'primary' : 'inactive'}
           onClick={() => switchMode('decode')}
         >
           🔍 Decode JWT
         </button>
         <button 
-          className={mode === 'encode' ? 'active' : ''}
+          className={mode === 'encode' ? 'primary' : 'inactive'}
           onClick={() => switchMode('encode')}
         >
           🔧 Encode JWT
         </button>
         <button 
-          className={mode === 'verify' ? 'active' : ''}
+          className={mode === 'verify' ? 'primary' : 'inactive'}
           onClick={() => switchMode('verify')}
         >
           ✅ Verify JWT
@@ -371,14 +370,15 @@ function JwtDecoder() {
 
               <div className="input-group">
                 <label htmlFor="algorithm-select">Algorithm</label>
-                <select
-                  id="algorithm-select"
+                <CustomDropdown
+                  options={[
+                    { value: 'HS256', label: 'HS256' },
+                    { value: 'none', label: 'none (unsigned)' }
+                  ]}
                   value={algorithm}
-                  onChange={(e) => setAlgorithm(e.target.value)}
-                >
-                  <option value="HS256">HS256</option>
-                  <option value="none">none (unsigned)</option>
-                </select>
+                  onChange={setAlgorithm}
+                  placeholder="Select algorithm"
+                />
               </div>
 
               <button 
