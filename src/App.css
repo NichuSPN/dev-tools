@@ -695,14 +695,14 @@
 }
 
 .viewer-section {
-  margin-top: 2rem;
+  /* margin-top: 2rem; */
 }
 
 .viewer-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
+  margin-bottom: 0.80rem;
 }
 
 .viewer-actions {

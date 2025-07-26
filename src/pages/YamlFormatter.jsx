@@ -249,7 +249,7 @@ string: Hello World`
           <div className="tool-section">
             <div className="viewer-section">
               <div className="viewer-header">
-                <h3>Interactive Viewer</h3>
+                <label>Interactive Viewer</label>
                 <div className="viewer-actions">
                   <button onClick={validateInput} className="primary">
                     Parse & View
