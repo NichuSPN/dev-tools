@@ -694,10 +694,6 @@
   flex-wrap: wrap;
 }
 
-.viewer-section {
-  /* margin-top: 2rem; */
-}
-
 .viewer-header {
   display: flex;
   justify-content: space-between;
