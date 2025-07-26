@@ -5,11 +5,12 @@
 }
 
 .nav {
-  background-color: var(--bg-card);
+  background: var(--gradient-secondary);
   border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
   z-index: 100;
+  backdrop-filter: blur(10px);
 }
 
 .nav-container {
@@ -31,6 +32,11 @@
   font-size: 1.25rem;
   font-weight: 700;
   white-space: nowrap;
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
 }
 
 .nav-groups {
@@ -163,6 +169,12 @@
 
 .tool-header h1 {
   margin: 0;
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  letter-spacing: 0.5px;
 }
 
 .tool-actions {
@@ -542,6 +554,13 @@
 .home-header h1 {
   font-size: 2.5rem;
   margin-bottom: 1rem;
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  letter-spacing: 1px;
+  font-weight: 700;
 }
 
 .tools-grid {
@@ -567,6 +586,7 @@
   border-color: var(--border-hover);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, var(--bg-card) 0%, rgba(255, 215, 0, 0.05) 100%);
 }
 
 .tool-card h3 {
