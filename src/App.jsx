@@ -12,6 +12,7 @@ import Home from './pages/Home'
 
 import Navigation from './components/navigationBar'
 import ComingSoon from './components/comingSoon'
+import TimestampConverter from './pages/TimestampConverter'
 
 const toolCategories = {
   'Converters': [
@@ -30,7 +31,7 @@ const toolCategories = {
     { 
       name: 'Timestamp Converter', 
       path: '/timestamp', 
-      component: null,
+      component: TimestampConverter,
       description: 'Convert between timestamps and readable dates'
     },
   ],

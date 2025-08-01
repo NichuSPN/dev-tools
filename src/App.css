@@ -160,6 +160,12 @@
   gap: 1rem;
 }
 
+.output-group {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
 .tool-header {
   display: flex;
   align-items: center;
