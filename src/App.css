@@ -28,6 +28,18 @@
   text-decoration: none;
 }
 
+.nav-logo img {
+  height: 40px;
+  width: auto;
+  border-radius: 6px;
+}
+
+.nav-title-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 .nav-title {
   font-size: 1.25rem;
   font-weight: 700;

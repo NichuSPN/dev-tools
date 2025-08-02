@@ -5,9 +5,14 @@ function Navigation ({ toolCategories }) {
     return (
         <nav className="nav">
             <div className="nav-container">
-                <Link to="/" className="nav-logo">
-                <span className="nav-title">Dev Tools</span>
+                <div className="nav-title-container">
+                <Link to="https://dataarena.space" className="nav-logo">
+                    <img src="/logo.png" alt="Data Arena Logo" className="nav-logo-img" />
                 </Link>
+                <Link to="/" className="nav-logo">
+                    <span className="nav-title">Dev Tools</span>
+                </Link>
+                </div>
                 <div className="nav-groups">
                 {Object.entries(toolCategories).map(([category, categoryTools]) => (
                     <div key={category} className="nav-group">
