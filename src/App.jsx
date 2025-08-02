@@ -13,6 +13,7 @@ import Home from './pages/Home'
 import Navigation from './components/navigationBar'
 import ComingSoon from './components/comingSoon'
 import TimestampConverter from './pages/TimestampConverter'
+import RegexTester from './pages/RegexTester.jsx'
 
 const toolCategories = {
   'Converters': [
@@ -67,7 +68,7 @@ const toolCategories = {
     { 
       name: 'Regex Tester', 
       path: '/regex', 
-      component: null,
+      component: RegexTester,
       description: 'Test regular expressions with live matching'
     },
     { 

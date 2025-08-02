@@ -417,6 +417,12 @@
   margin-top: 1rem;
 }
 
+.analysis-regex {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+}
+
 .analysis-item {
   display: flex;
   justify-content: space-between;
