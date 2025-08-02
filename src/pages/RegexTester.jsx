@@ -116,22 +116,30 @@ function RegexTester() {
       </div>
       {error && <div className="error-message">{error}</div>}
       {matches.length > 0 && (
-        <div className="card" style={{ marginTop: '2rem' }}>
+        <div className="card" style={{ marginTop: '2rem', overflowX: 'auto' }}>
           <h3>Matches</h3>
-          <div className="analysis-regex">
-            {matches.map((m, i) => (
-              <div className="analysis-item" key={i}>
-                <span className="analysis-label">Match {i + 1}: {m[0]}</span>
-                {/* <span></span> */}
-                {m.length > 1 && (
-                  <span style={{ color: 'var(--text-secondary)', fontSize: '0.85em' }}>
-                    Groups: {m.slice(1).map((g, gi) => <span key={gi}>[{g}] </span>)}
-                  </span>
-                )}
-                <span className="analysis-label">Index: {m.index}</span>
-              </div>
-            ))}
-          </div>
+          <table style={{ width: '100%', borderCollapse: 'collapse', fontFamily: 'var(--font-mono)' }}>
+            <thead>
+              <tr style={{ background: 'var(--bg-secondary)' }}>
+                <th style={{ textAlign: 'left', padding: '0.5rem', color: 'var(--text-primary)' }}>#</th>
+                <th style={{ textAlign: 'left', padding: '0.5rem', color: 'var(--text-primary)' }}>Match</th>
+                <th style={{ textAlign: 'left', padding: '0.5rem', color: 'var(--text-primary)' }}>Index</th>
+                <th style={{ textAlign: 'left', padding: '0.5rem', color: 'var(--text-primary)' }}>Groups</th>
+              </tr>
+            </thead>
+            <tbody>
+              {matches.map((m, i) => (
+                <tr key={i} style={{ background: i % 2 === 0 ? 'var(--bg-card)' : 'var(--bg-secondary)' }}>
+                  <td style={{ padding: '0.5rem', color: 'var(--text-secondary)' }}>{i + 1}</td>
+                  <td style={{ padding: '0.5rem' }}>{m[0]}</td>
+                  <td style={{ padding: '0.5rem' }}>{m.index}</td>
+                  <td style={{ padding: '0.5rem', color: 'var(--text-secondary)', fontSize: '0.95em' }}>
+                    {m.length > 1 ? m.slice(1).map((g, gi) => <span key={gi}>[{g}] </span>) : <span style={{ color: 'var(--text-muted)' }}>-</span>}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       )}
       <div className="card" style={{ marginTop: '2rem' }}>
