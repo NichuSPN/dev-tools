@@ -14,6 +14,7 @@ import Navigation from './components/navigationBar'
 import ComingSoon from './components/comingSoon'
 import TimestampConverter from './pages/TimestampConverter'
 import RegexTester from './pages/RegexTester.jsx'
+import CronParser from './pages/CronParser.jsx'
 
 const toolCategories = {
   'Converters': [
@@ -74,7 +75,7 @@ const toolCategories = {
     { 
       name: 'Cron Parser', 
       path: '/cron', 
-      component: null,
+      component: CronParser,
       description: 'Parse and explain cron expressions'
     },
   ]

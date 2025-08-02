@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "cron-parser": "^5.3.0",
     "crypto-js": "^4.2.0",
     "js-yaml": "^4.1.0",
     "react": "^19.1.0",
