@@ -8,11 +8,10 @@ A collection of useful utilities for developers built with React. All tools run 
 - **JWT Decoder** - Decode and inspect JSON Web Tokens ✅
 - **Base64 Encoder/Decoder** - Encode and decode Base64 strings ✅
 - **UUID Generator** - Generate UUIDs in various formats ✅
-- **HTTP Converter** - Convert between curl, fetch, and HTTPie formats (Coming Soon)
-- **Regex Tester** - Test regular expressions with live matching (Coming Soon)
-- **Cron Parser** - Parse and explain cron expressions (Coming Soon)
-- **Timestamp Converter** - Convert between timestamps and readable dates (Coming Soon)
-- **JSON/YAML Formatter** - Format and validate JSON and YAML (Coming Soon)
+- **Regex Tester** - Test regular expressions with live matching ✅
+- **Cron Parser** - Parse and explain cron expressions ✅
+- **Timestamp Converter** - Convert between timestamps and readable dates ✅
+- **JSON/YAML Formatter** - Format and validate JSON and YAML ✅
 
 ## Tech Stack
 
